@@ -13,13 +13,15 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import CustomCKEditor from './ck-editor';
+// import CustomCKEditor from './ck-editor';
+const CustomCKEditor = dynamic(() => import('./ck-editor'), { ssr: false });
 import SeoFields from './seo-fields';
 import request from '@/repo/request';
 import api from '@/repo/api';
 import toast from 'react-hot-toast';
 import { TSeo } from '@/types';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
 
 type PostData = {
   title: string | null;
@@ -74,6 +76,14 @@ export function PostEditorComponent({
   });
   const [writingSeo, setWritingSeo] = useState(false);
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, [])
+  if (!mounted) {
+    return null;
+  }
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
