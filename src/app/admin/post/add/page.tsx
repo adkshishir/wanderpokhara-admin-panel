@@ -1,4 +1,12 @@
-import { PostEditorComponent } from '@/components/post-editor';
+import dynamic from 'next/dynamic';
+
+const PostEditorComponent = dynamic(
+  () => import('@/components/post-editor').then((mod) => mod.PostEditorComponent),
+  {
+    ssr: false,
+  }
+)
+// import { PostEditorComponent } from '@/components/post-editor';
 import { Card } from '@/components/ui/card';
 import api from '@/repo/api';
 import request from '@/repo/request';

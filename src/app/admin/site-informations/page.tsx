@@ -59,51 +59,51 @@ const SiteInformations = async () => {
       </CardHeader>
       <CardContent>
         <CardDescription className='font-medium text-md'>
-          Phone1: {siteInfo.phone1}
+          Phone1: {siteInfo&&siteInfo?.phone1}
         </CardDescription>
         <CardDescription className='font-medium text-md'>
-          Phone2: {siteInfo.phone2}
+          Phone2: {siteInfo&&siteInfo?.phone2}
         </CardDescription>
         <CardDescription className='font-medium text-md'>
-          Info Email: {siteInfo.infoEmail}
+          Info Email: {siteInfo&&siteInfo?.infoEmail}
         </CardDescription>
         <CardDescription className='font-medium text-md'>
-          Sales Email: {siteInfo.salesEmail}
+          Sales Email: {siteInfo&&siteInfo?.salesEmail}
         </CardDescription>
         <CardDescription className='font-medium text-md'>
-          Support Email: {siteInfo.supportEmail}
+          Support Email: {siteInfo&&siteInfo?.supportEmail}
         </CardDescription>
         <CardDescription className='font-medium text-md'>
-          Address: {siteInfo.address}
+          Address: {siteInfo&&siteInfo?.address}
         </CardDescription>
         <CardDescription className='font-medium text-md'>
-          City: {siteInfo.city}
+          City: {siteInfo&&siteInfo?.city}
         </CardDescription>
         <CardDescription className='font-medium text-md'>
-          State: {siteInfo.state}
+          State: {siteInfo&&siteInfo?.state}
         </CardDescription>
         <CardDescription className='font-medium text-md'>
-          Country: {siteInfo.country}
+          Country: {siteInfo&&siteInfo?.country}
         </CardDescription>
         <CardDescription className='font-medium text-md'>
-          Zip Code: {siteInfo.zipCode}
+          Zip Code: {siteInfo&&siteInfo?.zipCode}
         </CardDescription>
         <CardDescription className='font-medium text-md'>
-          Banner Title: {siteInfo.bannerTitle}
+          Banner Title: {siteInfo&&siteInfo?.bannerTitle}
         </CardDescription>
         <CardDescription className='font-medium text-md'>
-          Banner Description: {siteInfo.bannerDescription}
+          Banner Description: {siteInfo&&siteInfo?.bannerDescription}
         </CardDescription>
         <CardDescription className='font-medium text-md'>
-          Banner Keys: {siteInfo.bannerKeys}
+          Banner Keys: {siteInfo&&siteInfo?.bannerKeys}
         </CardDescription>
         <CardDescription className='font-medium text-md'>
-          About Us: {siteInfo.aboutUs}
+          About Us: {siteInfo&&siteInfo?.aboutUs}
         </CardDescription>
         <CardDescription className='font-medium text-md'>
           Logo:{' '}
           <Image
-            src={siteInfo.logo || '/placeholder.svg'}
+            src={siteInfo&&siteInfo?.logo || '/placeholder.svg'}
             alt='logo'
             width={100}
             height={100}
@@ -112,7 +112,7 @@ const SiteInformations = async () => {
         <CardDescription className='font-medium text-md'>
           Dark Logo:
           <Image
-            src={siteInfo.darkLogo || '/placeholder.svg'}
+            src={siteInfo&&siteInfo?.darkLogo || '/placeholder.svg'}
             alt='logo'
             width={100}
             height={100}
@@ -121,7 +121,7 @@ const SiteInformations = async () => {
         <CardDescription className='font-medium text-md'>
           Favicon:
           <Image
-            src={siteInfo.favicon || '/placeholder.svg'}
+            src={siteInfo&&siteInfo?.favicon || '/placeholder.svg'}
             alt='logo'
             width={100}
             height={100}
@@ -130,7 +130,7 @@ const SiteInformations = async () => {
         <CardDescription className='font-medium text-md'>
           Banner:
           <Image
-            src={siteInfo.banner || '/placeholder.svg'}
+            src={siteInfo&&siteInfo?.banner || '/placeholder.svg'}
             alt='logo'
             width={100}
             height={100}
