@@ -11,7 +11,7 @@ jobs:
       SERVER_HOST: ${{ secrets.SERVER_HOST }}
       SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-    #   PASSPHRASE: ${{ secrets.PASSPHRASE }}
+      PASSPHRASE: ${{ secrets.PASSPHRASE }}
 
     steps:
       - name: Checkout code
@@ -41,7 +41,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-        #   passphrase: ${{ secrets.PASSPHRASE }} # Added passphrase support
+          passphrase: ${{ secrets.PASSPHRASE }} # Added passphrase support
           script: |
           
            cd /root/projects/wanderpokhara/wanderpokhara-admin-panel/
@@ -57,7 +57,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          # passphrase: ${{ secrets.PASSPHRASE }} # Added passphrase support
+          passphrase: ${{ secrets.PASSPHRASE }} # Added passphrase support
           script: |
             sudo systemctl restart nginx
 
