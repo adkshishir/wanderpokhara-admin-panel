@@ -124,7 +124,7 @@ export function PostEditorComponent({
     payload.append('seo', JSON.stringify(seoData));
     payload.append('seo.ogImage', seoData.ogImage || '');
     e.preventDefault();
-    console.log(payload.getAll('images'));
+    console.log(payload.getAll('images'),"images");
     if (initialData) {
       await request.patchWithFile({
         endPoint: api.POST + '/' + initialData.slug,
@@ -307,11 +307,11 @@ export function PostEditorComponent({
                 />
                 {formData.images.length > 0 && (
                   <div className='mt-2'>
-                    {/* <p>Selected images:</p> */}
-                    {/* <ul className='list-disc pl-5'>
+                    {/* <p>Selected images:</p>
+                    <ul className='list-disc pl-5'>
                       {formData.images.map((image, index) => (
                         // @ts-ignore
-                        <li key={index}>{image.name }</li>
+                        <li key={index}>{image.url }</li>
                       ))}
                     </ul> */}
                   </div>

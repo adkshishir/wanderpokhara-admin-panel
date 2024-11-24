@@ -20,10 +20,11 @@ const Edit = async ({ params }: any) => {
   await request.get({
     endPoint: `${api.POST}/${params.slug}`,
     params: undefined,
-    success: (message: string, response: { data: TPost }) => {
-      initialData = response.data;
+    success: (message: string, response: { data:{post: TPost} }) => {
+      initialData = response.data.post;
     },
-    failure: (message: string) => {},
+    failure: (message: string) => {
+    },
   });
   return (
     <Card className='m-4'>
