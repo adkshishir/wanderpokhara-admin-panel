@@ -25,8 +25,8 @@ jobs:
         # Use the 'appleboy/ssh-action' action for SSH deployment
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST }} # server's IP address
-          username: ${{ secrets.USERNAME }} # server's username
+          host: ${{ secrets.SERVER_HOST }} # server's IP address
+          username: ${{ secrets.SERVER_USERNAME }} # server's username
           key: ${{ secrets.SSH_PRIVATE_KEY }} # server's SSH private key
           passphrase: ${{ secrets.PASSPHRASE }} # server's SSH private key passphrase
           script: |
