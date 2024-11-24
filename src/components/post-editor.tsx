@@ -13,13 +13,18 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import CustomCKEditor from './ck-editor';
+// import CustomCKEditor from './ck-editor';
+const CustomCKEditor = dynamic(
+  () => import('./ck-editor').then((mod) => mod.default),
+  {}
+);
 import SeoFields from './seo-fields';
 import request from '@/repo/request';
 import api from '@/repo/api';
 import toast from 'react-hot-toast';
 import { TSeo } from '@/types';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
 
 type PostData = {
   title: string | null;
@@ -114,7 +119,7 @@ export function PostEditorComponent({
     payload.append('seo', JSON.stringify(seoData));
     payload.append('seo.ogImage', seoData.ogImage || '');
     e.preventDefault();
-    console.log(payload.getAll('images'),"images");
+    console.log(payload.getAll('images'), 'images');
     if (initialData) {
       await request.patchWithFile({
         endPoint: api.POST + '/' + initialData.slug,
