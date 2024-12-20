@@ -33,7 +33,6 @@ export function Delete(props: { id: number; type: string }) {
       endPoint: endPoint(),
       data: {},
       success: (message: string, response: any) => {
-        console.log(endPoint(), response);
         toast.success(message + ' ' + props.type);
         router.refresh();
       },

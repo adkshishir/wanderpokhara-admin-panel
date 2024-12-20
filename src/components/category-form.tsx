@@ -78,7 +78,6 @@ export default function CategoryForm({ initialData }: { initialData?: any }) {
     payload.append('image', formData.image || '');
     payload.append('seo', JSON.stringify(seoData));
     payload.append('seo.ogImage', seoData.ogImage || '');
-    console.log(formData, JSON.stringify(seoData));
     if (initialData) {
       await request.patchWithFile({
         endPoint: `${api.CATEGORY}/${initialData.slug}`,

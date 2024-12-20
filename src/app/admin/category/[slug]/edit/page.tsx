@@ -11,13 +11,11 @@ const EditCategory = async ({
 }) => {
   let category: TCategory = undefined;
   const { slug } = await params;
-  console.log(slug);
   await request.get({
     endPoint: `${api.CATEGORY}/${slug}`,
     params: undefined,
     success: (message: string, response: any) => {
       category = response.data;
-      console.log(response);
     },
     failure: (message: string) => {},
   });

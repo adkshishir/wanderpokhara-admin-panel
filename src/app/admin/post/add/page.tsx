@@ -24,9 +24,9 @@ const page = async () => {
   });
 
   return (
-    <Card className='m-4'>
+   
       <PostEditorComponent categories={categories} />
-    </Card>
+  
   );
 };
 

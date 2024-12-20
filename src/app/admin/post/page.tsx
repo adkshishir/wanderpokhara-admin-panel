@@ -24,11 +24,9 @@ const Post = async () => {
     endPoint: api.POST,
     data: {},
     success: (message: string, response: any) => {
-      console.log(response.data, 'posts');
       posts = response.data;
     },
     failure: (message: string) => {
-      console.log(message);
     },
   });
   return (

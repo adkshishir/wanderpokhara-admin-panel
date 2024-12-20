@@ -1,16 +1,7 @@
-// app/page.js or pages/index.js
-'use client';
-
+import React from 'react';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
-import { SetStateAction, useState } from 'react';
 
-export default function Page() {
-  const [content, setContent] = useState('');
-
-  const handleEditorChange = (content: SetStateAction<string>) => {
-    setContent(content);
-  };
-
+const Admin = () => {
   return (
     <div className='container mx-auto p-4'>
       <h1 className='text-2xl font-bold mb-4'>Wander Pokhara Dashboard</h1>
@@ -21,4 +12,6 @@ export default function Page() {
       </Card>
     </div>
   );
-}
+};
+
+export default Admin;

@@ -113,7 +113,6 @@ export function SiteForm(props: { siteInfo: TSiteInformations }) {
       failure: (message: string) => {
         toast.error(message);
         setLoading(false);
-        console.log(message);
       },
     });
   };

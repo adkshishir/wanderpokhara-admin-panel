@@ -48,7 +48,7 @@ export function AdminPanel({ children }: { children: React.ReactNode }) {
         } fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0`}>
         <div className='flex items-center justify-between h-16 border-b px-6'>
           <Link href={'/'} className='text-2xl font-bold'>
-            <h1 className='text-xl font-semibold'>Fly pokhara</h1>
+            <h1 className='text-xl font-semibold'>Wander Pokhara</h1>
           </Link>
           <Button
             variant='ghost'
