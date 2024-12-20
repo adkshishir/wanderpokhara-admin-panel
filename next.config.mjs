@@ -8,6 +8,12 @@ const nextConfig = {
         port: '8000',
         pathname: '/uploads/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'api.wanderpokhara.com',
+        port: '',
+        pathname: '/uploads/**',
+      },
     ],
   },
 };
