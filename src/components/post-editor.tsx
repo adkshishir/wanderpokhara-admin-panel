@@ -12,7 +12,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 // import CustomCKEditor from './ck-editor';
 const CustomCKEditor = dynamic(
   () => import('./ck-editor').then((mod) => mod.default),
@@ -25,6 +31,8 @@ import toast from 'react-hot-toast';
 import { TSeo } from '@/types';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
+import { Car, Delete } from 'lucide-react';
 
 type PostData = {
   title: string | null;
@@ -37,7 +45,14 @@ type PostData = {
   createdAt: string;
   content: string | null;
   readTime: string;
-  images: File[];
+  images: (
+    | File
+    | {
+        url: string;
+        alt: string;
+      }
+  )[];
+
   seo: TSeo | undefined;
 };
 
@@ -97,8 +112,8 @@ export function PostEditorComponent({
         images: [...prev.images, ...Array.from(e.target.files as FileList)],
       }));
     }
-  };
 
+  };
   const handleSubmit = async (e: React.FormEvent) => {
     const payload = new FormData();
     payload.append('title', formData.title || '');
@@ -113,13 +128,15 @@ export function PostEditorComponent({
     payload.append('readTime', formData.readTime);
     if (formData.images.length > 0) {
       Array.from(formData.images).forEach((file) => {
-        payload.append('images', file);
+        // payload.append('images', file.url ? file.url : file);
+        file instanceof File
+          ? payload.append('images', file)
+          : payload.append('images', JSON.stringify(file));
       });
     }
     payload.append('seo', JSON.stringify(seoData));
     payload.append('seo.ogImage', seoData.ogImage || '');
     e.preventDefault();
-    console.log(payload.getAll('images'), 'images');
     if (initialData) {
       await request.patchWithFile({
         endPoint: api.POST + '/' + initialData.slug,
@@ -150,6 +167,12 @@ export function PostEditorComponent({
       },
     });
   };
+  function handleDeleteImage(index: number) {
+    setFormData((prev) => ({
+      ...prev,
+      images: prev.images.filter((_, i) => i !== index),
+    }));
+  }
 
   return (
     <Card className=' m-4'>
@@ -173,7 +196,7 @@ export function PostEditorComponent({
             </Button>
           </div>
           {!writingSeo && (
-            <Card className='p-4'>
+            <div className='p-4'>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                 {' '}
                 <div className='space-y-2'>
@@ -221,7 +244,7 @@ export function PostEditorComponent({
                 <div className='space-y-2'>
                   <Label htmlFor='status'>Category</Label>
                   <Select
-                    value={formData.categoryId || undefined}
+                    value={formData.categoryId.toString() || undefined}
                     onValueChange={(value) =>
                       handleSelectChange('categoryId', value)
                     }>
@@ -302,17 +325,66 @@ export function PostEditorComponent({
                 />
                 {formData.images.length > 0 && (
                   <div className='mt-2'>
-                    {/* <p>Selected images:</p>
-                    <ul className='list-disc pl-5'>
+                    <p>Selected images:</p>
+                    <div className='flex flex-wrap'>
                       {formData.images.map((image, index) => (
                         // @ts-ignore
-                        <li key={index}>{image.url }</li>
+                        <>
+                          {image instanceof Blob ? (
+                            <Card className='relative'>
+                              <Image
+                                key={index}
+                                src={URL.createObjectURL(image)}
+                                alt={`Image ${index}`}
+                                width={100}
+                                height={100}
+                                className='w-32 h-32 object-cover'
+                              />
+
+                              <CardFooter className='py-1 flex justify-end'>
+                                <Button
+                                  type='button'
+                                  onClick={() => handleDeleteImage(index)}
+                                  size={'sm'}
+                                  className='float-right bg-red-500  bottom-4 right-4'>
+                                  <Delete
+                                    className=' text-white  rounded-full   flex items-center justify-center'
+                                    type='image'
+                                  />
+                                </Button>
+                              </CardFooter>
+                            </Card>
+                          ) : (
+                            <Card className='relative'>
+                              <Image
+                                key={index}
+                                src={image.url}
+                                alt={`Image ${index}`}
+                                width={100}
+                                height={100}
+                                className='w-32 h-32 object-cover'
+                              />
+                              <CardFooter className='py-1 flex justify-end'>
+                                <Button
+                                  type='button'
+                                  onClick={() => handleDeleteImage(index)}
+                                  size={'sm'}
+                                  className='float-right bg-red-500  bottom-4 right-4'>
+                                  <Delete
+                                    className=' text-white  rounded-full   flex items-center justify-center'
+                                    type='image'
+                                  />
+                                </Button>
+                              </CardFooter>
+                            </Card>
+                          )}
+                        </>
                       ))}
-                    </ul> */}
+                    </div>
                   </div>
                 )}
               </div>
-            </Card>
+            </div>
           )}
           {writingSeo && (
             <SeoFields seoData={seoData} setSeoData={setSeoData} />
