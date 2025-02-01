@@ -59,6 +59,8 @@ import {
   TableToolbar,
   TextTransformation,
   Underline,
+  List,
+  ListProperties,
   Undo,
 } from 'ckeditor5';
 
@@ -89,6 +91,9 @@ export default function App({ content, onChange }) {
         'fontFamily',
         'fontColor',
         'fontBackgroundColor',
+        '|',
+        'bulletedList',
+        'numberedList',
         '|',
         'bold',
         'italic',
@@ -164,6 +169,8 @@ export default function App({ content, onChange }) {
       TextTransformation,
       Underline,
       Undo,
+      List,
+      ListProperties,
     ],
     balloonToolbar: ['bold', 'italic', '|', 'link', 'insertImage'],
     fontFamily: {
@@ -247,6 +254,13 @@ export default function App({ content, onChange }) {
     },
     menuBar: {
       isVisible: true,
+    },
+    list: {
+      properties: {
+        styles: true, // Allow custom list styles
+        startIndex: true, // Allow custom start index for ordered lists
+        reversed: true, // Allow reversed ordered lists
+      },
     },
     placeholder: 'Type or paste your content here!',
     table: {
